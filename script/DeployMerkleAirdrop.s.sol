@@ -11,7 +11,7 @@ contract DeployMerkleAirdrop is Script {
     bytes32 private ROOT = 0xaa5d581231e596618465a56aa0f5870ba6e20785fe436d5bfb82b08662ccc7c4;
     uint256 private AMOUNT_TO_TRANSFER = 4 * 25e18;
 
-    function deployMerkleAirdrop() external returns (MerkleAirdrop, BagelToken) {
+    function deployMerkleAirdrop() private returns (MerkleAirdrop, BagelToken) {
         vm.startBroadcast();
         BagelToken token = new BagelToken();
         MerkleAirdrop airdrop = new MerkleAirdrop(ROOT, IERC20(address(token)));
@@ -23,6 +23,6 @@ contract DeployMerkleAirdrop is Script {
     }
 
     function run() external returns (MerkleAirdrop, BagelToken) {
-        return deployMerkleAirdrop;
+        return deployMerkleAirdrop();
     }
 }
